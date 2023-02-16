@@ -1,0 +1,173 @@
+“Business Insights on Post-COVID Taxi System”
+
+
+[28-11-2021]
+
+SELECTION OF TOPIC
+---------------------------------------------------------------------------------------------------------------------------------
+Me and my team member Shivraj were more interested in domains like Business Intelligence, Data Visualization and Data Analytics. 
+So, while searching for the topic, we were looking for the one which was included in these mentioned domains. 
+Luckily, we came across the dataset related to New York Taxi System, and we saw possibility in the subject.
+
+We all know COVID shifted the dynamics of every field in market. So, we decided to get the insights of Taxi system post-COVID. 
+Insights like the effect on business on daily basis, region wise and pre and post COVID. 
+
+
+[28-11-2021]
+
+DATASET
+----------------------------------------------------------------------
+For this topic there were multiple types of dataset available online, most of them were clean and hardly few were raw dataset. 
+We found the suitable data set on website NYC-Taxi and Limousine Comission (TLC). The url is - https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page
+
+We have downloaded the dataset from January 2020 to July 2021. The dataset contains 18 variables. Following is the information of the dataset:
+	1. 'VendorID' – code indicating the TPER ( Taxicab and Livery Passeng  er ENchancement Programs (TPEP ) provider that provided the record	
+	2. 'tpep_pickup_datetime' – pick up date and time 
+	3. 'tpep_dropoff_datetime' – drop off date and time
+       	4. 'passenger_count' – passenger count 
+	5. 'trip_distance' – elapsed trip distance in miles reported by the taximeter 
+	6. 'RatecodeID' – final rate code effect at the end of the trip
+		1 – Standard Rate
+		2 – JFK
+		3 – Newark
+		4 – Nassau
+		5 – Negotiated fare
+		6 – group ride
+	7. 'store_and_fwd_flag' – flag indicated whether the trip record was held in vehicle
+		Y – store and forward trip
+		N – not a store and forward trip
+        8. 'PULocationID' – TLC Taxi zone in which taximeter was engaged 
+	9. 'DOLocationID' – TLC Taxi zone in whoch taximeter was disengaged 
+	10. 'payment_type' – numeric code signifying the payment mode
+		1 – credit card
+		2 – cash
+		3 – no charge
+		4 – dispute
+		5 – unknown
+		6 – voided trip
+ 	11. 'fare_amount' – time and distance fare calculated by the meter 
+	12. 'extra' – miscellaneous extras and surcharges.
+		1. Rush charge – 0.5 USD
+		2. Overnight charge – 1 USD
+       	13. 'mta_tax' – 0.50 MTA tax, automatically added 
+	14. 'tip_amount' – tip amount. field is automatically populated for credit card tips., cash tips are not included. 
+	15. 'tolls_amount' – total amount of all tolls paid in trip 
+	16. 'improvement_surcharge' – 0.30 imporvement surcharge assessed trips at the flag drop.
+        17. 'total_amount' – total amount charged to passengers. Does not include cash tips. 
+	18. 'congestion_surcharge' – additional charge added to base charge during unusal events like strikes, bad winter, major port fires.
+
+
+[28-11-2021]
+
+ARRANGING THE FINAL DATASET
+--------------------------------------------------------------------------------------------------------------------------------------------------
+I have loaded the 19 dataset from January 2020 to July 2021.
+I got the random samples from those datasets using sample() with 50k individuals each.
+I merged all those samples into final dataset, using concat() 
+here, i faced the issue of having index number not in proper order which gave issues for sns.pairplot, as few index were repeating itself.
+so, i used the funciton reset_index() to sort the index number.
+i tried to convert the dataset into csv from dataframe, using function to_csv("path_of_file"), but it didnt worked and gave me Permission Error.
+In this way, i succesfully created the final dataset of project.
+ 
+
+[15-12-2021]
+
+FINALIZING THE DATA SET
+----------------------------------------------------------------------------------------------------------------------------------------------------
+the jupyter notebook having code related to dataset creation is separated from main project notebook to make it more systematic and clean
+I have started the EDA and Cleaning process in the main project notebook.
+
+
+[28-11-2021]
+
+EDA
+------------------------------------------------------------------------------------------------------------------------------------------------
+i have shifted my focus on statistical and basic understanding of data in my dataset, for which i performed basic EDA first.
+i have used df.shape for df size
+i have used df.columns for printing the names of the columns
+i have used the info() for printing the datatypes and nulll values coming in the features of dataset
+then, i used describe() for statistical info like min, max, and related values.
+after having this info about our datasrt, i tried to understand the data types.
+df.isna().sum() gave total number of missing values
+
+
+
+[29-11-2021]
+
+Cleansing the data
+----------------------------------------------------------------------------------------------------------------------------------
+firstly i used the .isna().sum() functio to give me the total number of NANs in every column.
+then i used .isnull() to get the number of rows with missing values.
+i wanted to search and replace infinity values to NANs if there was any present in it, so i used .replace([np.inf, -np.inf], np.nan, inplace=True)
+for this. i got this function from google.
+after going through all this i came to situation where i had to change the pickup date time and dropoff date time features, so that i coukd easily 
+handle those features during model building.
+
+
+[29-11-2021]
+
+Changing the datatype of date time related features
+--------------------------------------------------------------------------------------------------------------------------------------------
+as the original dataset had the date, time combined in one column we needed to separate them in order to do proper operations during model building
+initially the datatype of these two features was string i.e. object as we saw in the .info().
+we used .astype('datetime64[ns]) to changed it to datetime64.
+
+[29-11-2021]
+
+Process flow diagram / Process Map
+---------------------------------------------------------------------------------------------------------------------------------------------------
+as instructed for the stage 1 evaluation, i have completed the process flow diagram successfully. 
+the process is as follows : START --> Create Dataset ---> cleaning Dataset ----> Calculating Correlation
+----> creating and training model ---->checking accuracy of the created model ----> visualization ---> STOP
+
+
+[29-11-2021]
+
+Added day, hour, ride duration columns
+-------------------------------------------------------------------------------------------------
+we use the functions related to time series in this operations. we approach these path so that these newly added features will be helpful during model buiding.
+i have added four new features namely hour of pick up and drop off, day of the week and day of the month. These newly added features will be useful in future.
+
+
+
+[30-11-2021]
+
+DATA CLEANING
+----------------------------------------------------------------------------------------------------------------------------------------------------
+we found few outliers in the data after EDA. 
+i have removed the fare cost which is in negative amount.
+also, i have removed the records of taxi working outside the NYC.
+also, removed the missing values.
+
+
+[08-01-2022]
+
+TAXI ZONE DATASET
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+I got the dataset from the main source about the area zones of taxi system.
+Imported the geopy module, and initialize NominationAPI to get location from the input string.
+i found 30 errors while perfoming this operation, so i used try-except method and replaced them with string.
+Hereafter i have compared those values with the max and min latitude and longitude of NYC, which are Max_latitude = 45.011667 and MIN_latitude = 40.494444
+and MAX_longitude = -71.790278 and MIN_longitude = -79.765.
+comparing the coordinates we found that 88 entries were outside the new york city.
+i found the latitudes and longitudes of these 88 records and have updated it manually.
+
+
+[20-01-2022]
+
+JOINING THE DATASETS
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+BY using the left join from pandas documentation, i have joined both the datasets. 
+
+
+
+[21-01-2022]
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+remodified everything.
+
+
+
+
+
+
+

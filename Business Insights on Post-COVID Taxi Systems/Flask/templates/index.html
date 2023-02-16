@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>TAXI FARE PREDICTION</title>
+  <link rel="shortcut icon" href="../static/images/taxi_logo.png">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat|Ubuntu" rel="stylesheet">
+
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="../static/css/styles.css">
+
+  <!-- Font Awesome -->
+  <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+  <!-- Bootstrap Scripts -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+  <section class="colored-section" id="title">
+
+    <div class="container-fluid">
+
+      <!-- Nav Bar -->
+
+      <nav class="navbar navbar-expand-lg navbar-dark">
+
+        <a class="navbar-brand" href=""><img src="../static/images/taxi_logo.png" alt="taxi" width="150" height="150"></a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+
+          
+
+        </div>
+      </nav>
+
+
+      <!-- Title -->
+
+      <div class="row">
+
+        <div class="col-lg-12">
+          <h1 class="big-heading">Bussiness Analysts of Post-Covid Taxi System</h1>
+          <h3 class="big-heading">56809_Onkar_Shelar</h3>
+          <!-- <button type="button" class="btn btn-dark btn-lg download-button"><i class="fab fa-apple"></i> Download</button> -->
+          <!-- <button type="button" class="btn btn-outline-light btn-lg download-button"><i class="fab fa-google-play"></i> Download</button> -->
+        </div>
+
+       
+
+      </div>
+      <br>
+      
+
+    </div>
+
+  </section>
+
+
+  <!-- Features -->
+
+  <section class="white-section" id="features">
+    <form method="post" action="/set">
+    <div class="container-fluid">
+      <div class="row">
+        
+        <div class="input-group mb-3 col-lg">
+          <div class="input-group-prepend">
+            <label class="input-group-text bg-info" for="inputGroupSelect01">Source</label>
+          </div>
+         
+          
+            <select name="dropdown_1" class="selectpicker form-control">
+              <option selected>Choose...</option>
+              {%for i in range(0,len):%}
+  
+              <option value="{{options[i]}}">{{options[i]}}</option>
+              {%endfor%}
+              
+            
+          </select>
+        </div>
+        <div class="input-group mb-3 col-lg">
+          <div class="input-group-prepend">
+            <label class="input-group-text bg-info" for="inputGroupSelect01">Destination</label>
+          </div>
+          <select name="dropdown_2" class="selectpicker form-control">
+            <option selected>Choose...</option>
+           
+            {%for i in range(0,len):%}
+  
+              <option value="{{options[i]}}">{{options[i]}}</option>
+              {%endfor%}
+            
+          
+        </select>
+        </div>
+        <div class="input-group mb-3 col-lg">
+          <div class="input-group-prepend">
+            <label class="input-group-text bg-info" for="inputGroupSelect01">Destination</label>
+          </div>
+          <select name="dropdown_3" class="selectpicker form-control">
+            <option selected>Choose...</option>
+
+            {%for i in range(0,vendor_len):%}
+
+              <option value="{{vendor_list[i]}}">{{vendor_list[i]}}</option>
+              {%endfor%}
+
+
+        </select>
+        </div>
+      </div>
+      <div class="row ">
+        <div class="feature-box col-lg-4">
+           <!-- <img src="../static/images/taxi_logo.png" alt="taxi" width="100" height="100">
+          <h3 class="feature-title " style="font-size: 25px;">LINEAR REGRESSION</h3>
+          <form action="/linear" method="post" >
+            <button class="btn btn-primary" type="submit" style="margin-top: 10px;">Calculate</button>
+          </form>  -->
+          
+          
+        </div>
+
+        <div class="feature-box col-lg-4 " >
+         
+            <!-- <img src="../static/images/taxi_logo.png" alt="taxi" width="100" height="100"> -->
+            <!-- <h3 class="feature-title" style="font-size: 25px;">Find Fare</h3> -->
+            <form action="/cost" method="post">
+              <button class="download-button btn btn-lg brn-light btn-primary"style="color:white" type="submit"><span>   Cost   </span>   </button>
+            </form>
+          
+         
+          
+          
+        </div>
+
+        <div class="feature-box col-lg-4">
+           <!-- <img src="../static/images/taxi_logo.png" alt="taxi" width="100" height="100">
+          <h3 class="feature-title" style="font-size: 25px;">XG BOOST</h3>
+          <form action="/xg" method="post">
+            <button class="btn btn-primary" style="margin-top: 10px;">Calculate</button>
+          </form>  -->
+          
+          
+         </div>
+      </div>
+
+
+    </div>
+      
+    </form>
+    <br><br><br><br><br><br>
+  </section>
+
+
+  <!-- Testimonials -->
+
+  <!-- <section class="colored-section" id="testimonials">
+
+    <div id="testimonial-carousel" class="carousel slide" data-ride="false">
+      <div class="carousel-inner">
+        <div class="carousel-item active container-fluid">
+          <h2 class="testimonial-text">I no longer have to sniff other dogs for love. I've found the hottest Corgi on TinDog. Woof.</h2>
+          <img class="testimonial-image" src="images/dog-img.jpg" alt="dog-profile">
+          <em>Pebbles, New York</em>
+        </div>
+        <div class="carousel-item container-fluid">
+          <h2 class="testimonial-text">My dog used to be so lonely, but with TinDog's help, they've found the love of their life. I think.</h2>
+          <img class="testimonial-image" src="images/lady-img.jpg" alt="lady-profile">
+          <em>Beverly, Illinois</em>
+        </div>
+      </div>
+      <a class="carousel-control-prev" href="#testimonial-carousel" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+      </a>
+      <a class="carousel-control-next" href="#testimonial-carousel" role="button" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+      </a>
+    </div>
+
+  </section> -->
+
+
+  <!-- Press -->
+
+  <!-- <section class="colored-section" id="press">
+    <img class="press-logo" src="images/techcrunch.png" alt="tc-logo">
+    <img class="press-logo" src="images/tnw.png" alt="tnw-logo">
+    <img class="press-logo" src="images/bizinsider.png" alt="biz-insider-logo">
+    <img class="press-logo" src="images/mashable.png" alt="mashable-logo">
+
+  </section> -->
+
+
+  <!-- Pricing -->
+
+
+  <!-- Call to Action -->
+
+  <section class="colored-section" id="cta">
+
+    <div class="container-fluid">
+
+      <h3 class="big-heading">BUISINESS INSIGHTS</h3>
+      <img src="../static/images/plain-white-background.jpg" id="temp" alt="taxi" width="200" height="20">
+       <!-- <button class="download-button btn btn-lg btn-dark" type="button"><i class="fab fa-apple"></i> Download</button> -->
+       <img src="../static/images/Bar_Chart_4_Columns_.gif" alt="taxi" width="200" height="200"><br>  
+      
+       <form method="post" action="/powerbi">
+        <button class="download-button btn btn-lg brn-light btn-primary" style="margin-top: 10px;margin-left: 40px;" type="submit"> Buisiness Insights</button>
+       </form>
+       
+    </div>
+  </section>
+
+
+
+
+</body>
+
+</html>
